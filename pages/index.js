@@ -59,7 +59,11 @@ export default function Home() {
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.buttonContainer}>
-          <Link href="/">Home page test12</Link>
+<<<<<<< HEAD
+          <Link href="/">Home page</Link>
+=======
+          <Link href="/">Home page</Link>
+>>>>>>> de836512b79f0873a5652312f5262925cd7fa47e
         </div>
         {posts.map((item) => {
           return (
