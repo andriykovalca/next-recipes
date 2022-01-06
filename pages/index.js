@@ -59,7 +59,7 @@ export default function Home() {
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.buttonContainer}>
-          <Link href="/">Home page test</Link>
+          <Link href="/">Home page test1</Link>
         </div>
         {posts.map((item) => {
           return (
