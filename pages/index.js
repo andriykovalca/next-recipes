@@ -1,64 +1,49 @@
-import Head from 'next/head'
+// import Head from 'next/head'
 import Image from 'next/image'
-import React from 'react'
-import styles from '../styles/Home.module.css'
-import Link from "next/link";
-import {getAllPostsForHome} from "../lib/api"
+// import React from 'react'
+// import styles from '../styles/Home.module.css'
+// import Link from "next/link";
+import { createClient } from 'contentful'
 
+export async function getStaticProps() {
+    
+    const client = createClient({
+        space: process.env.CONTENTFUL_SPACE,
+        accessToken: process.env.CONTENTFUL_TOKEN,
+    })
 
+    const res = await client.getEntries({ content_type: 'recipe' })
 
-export default function Home({allPosts}) {
-  return (
-      <div className={styles.container}>
-      <Head>
-          <title>Blog app</title>
-          <meta name="description" content="Simple blog app with Contentful CMS" />
-          <link rel="icon" href="/favicon.ico" />
-      </Head>
+    return {
+        props: {
+            recipes: res.items
+        }
+    }
+}
 
-      <main className={styles.main}>
+export default function Home({ recipes }) {
+    console.log(recipes[0])
 
-          <div className={styles.grid}>
-          {
-              allPosts.length > 0 ? (
-              allPosts.map((post) => (
-                  <div className={styles.card} key={post.sys.id}>
-                  <div className={styles.imageHolder}>
-                      <img src={post.coverImage.url} alt={post.title} />
-                  </div>
-                  <div className={styles.details}>
-                      <Link href={`posts/${post.sys.id}`}>
-                      <a>
-                      {post.title} &rarr;
-                      </a>
-                      </Link>
-                      <p>{post.excerpt}</p>
-                  </div>
-                  </div>
-              ))
-              ) : (
-              <div className={styles.card}>
-              <p>No posts added!</p>
-          </div>
-              )
-          }
-          </div>
-      </main>
-
-      <footer className={styles.footer}>
-          <p>Simple blog app</p>
-      </footer>
-      </div>
+    return (
+        <div className="container">
+            <main>
+            <h1>Recipes</h1>
+            {recipes.map(recipe => (
+                <ul key={recipe.sys.id}>
+                    <li>
+                        <Image width={200} height={200} alt={recipe.fields.title} src={"https:" + recipe.fields.image.fields.file.url} />
+                        <h2>{recipe.fields.title}</h2>
+                        <div>
+                            <span>Prep time:</span> <span>{recipe.fields.prepTime} minutes</span>
+                        </div>
+                        <div>
+                            <span>Cook time:</span> <span>{recipe.fields.cookTime} minutes</span>
+                        </div>
+                    </li>
+                </ul>
+            ))}
+            </main>
+        </div>
   )
 }
 
-
-export async function getStaticProps({preview = false}){
-  let allPosts = (await getAllPostsForHome(preview))  ?? [];
-
-  return {
-      props: { preview, allPosts }
-      
-  }
-  
-}
