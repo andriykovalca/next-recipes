@@ -1,6 +1,9 @@
 import Head from 'next/head'
 import styles from '../../styles/RecipeDetails.module.css'
 import { createClient } from 'contentful'
+import Image from 'next/image'
+import { documentToReactComponents } from '@contentful/rich-text-react-renderer';
+
 
 const client = createClient({
     space: process.env.CONTENTFUL_SPACE,
@@ -38,16 +41,57 @@ export async function getStaticProps({ params }) {
 }
 
 export default function RecipeDetails({ recipe }) {
-    console.log(recipe)
+    const { image, title, cookTime, prepTime, directions, ingredients} = recipe.fields
+    console.log(directions)
     return (
         <div>
             <Head>
-				{/* <title>{title} - Next Recipes</title> */}
+				{<title>{title} - Next Recipes</title>}
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
             <main>
                 <div className={styles.container}>
-                    Recipe details
+                    <div className='banner'>
+                        <Image 
+                            className={styles.bannerImage}
+                            src={'https:' + image.fields.file.url}
+                            width={820}
+                            height={400}
+                            alt={title}
+                        />
+                    </div>
+                    <div>
+                        <h1 className={styles.heading}>{title} recipe</h1>
+                        <div className={styles.timeContainer}>
+                            <div className={styles.time}>
+                                <div>Prep time:</div> <span> {prepTime} minutes</span>
+                            </div>
+                            <div className={styles.time}>
+                                <div>Cook time:</div> <span>{cookTime} minutes</span>
+                            </div>
+                            <div className={styles.time}>
+                                <div>Total: </div> <span>{prepTime + cookTime} minutes</span>
+                            </div>
+                        </div>
+                        <div className={styles.ingredients}>
+                            <h2>Ingredients</h2>
+                            <div className={styles.ingredientsContainer}>
+                                <ul>
+                                    {ingredients.map(ingredient => (
+                                        <li key={ingredient.id}>{ingredient.key} - {ingredient.value}</li>
+                                    ))}
+
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div className={styles.directions}>
+                            <h2>Directions</h2>
+                            <div className={styles.directionsContainer}>
+                                {documentToReactComponents(directions)}
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </main>
         </div>

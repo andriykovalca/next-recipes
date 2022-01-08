@@ -126,3 +126,20 @@
 .thumb {
   object-fit: cover;
 }
+
+.bannerImage {
+  object-fit: cover;
+}
+
+.heading {
+  text-align: center;
+}
+
+.timeContainer {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.time div {
+  font-weight: 700;
+}

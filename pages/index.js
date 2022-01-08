@@ -23,7 +23,8 @@ export async function getStaticProps() {
 }
 
 export default function Home({ recipes }) {
-    console.log(recipes[0])
+	
+    // console.log(recipes[0])
 
     return (
 		<div>

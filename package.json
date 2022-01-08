@@ -8,6 +8,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@contentful/rich-text-react-renderer": "^15.11.1",
     "contentful": "^9.1.5",
     "firebase": "^9.6.1",
     "firebase-admin": "^10.0.1",
