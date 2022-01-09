@@ -120,7 +120,48 @@
 
 .singleRecipe {
   list-style-type: none;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
+  background: #FFF;
+  border-radius: 15px;
+  overflow: hidden;
+  max-width: 250px;
+}
+
+.singleRecipe img {
+  width: 250px;
+  height: 250px;
+}
+
+.singleRecipe svg {
+  vertical-align: middle;
+}
+
+.singleRecipe h2 {
+  margin-top: 0;
+}
+
+.singleRecipe span {
+  top: 1px;
+  position: relative;
+}
+
+.readMore {
+  margin-top: 20px;
+  font-weight: 700;
+  display: block;
+  text-align: right;
+  transition: all 0.25s ease;
+}
+
+.readMore:hover {
+  transform: translateX(-5px);
+  color: #0070f3;
+}
+
+.singleRecipe .recipeInfo {
+  box-shadow: 3px -3px 14px 0 rgb(6 24 63 / 10%);
+  padding: 20px;
+  
 }
 
 .thumb {

@@ -131,15 +131,56 @@
   object-fit: cover;
 }
 
+
+
 .heading {
   text-align: center;
 }
 
+.information {
+  display: flex;
+  justify-content: space-around;
+}
+
+.ingredient {
+  border-spacing: 0;
+}
+
+.ingredient td {
+  padding: 8px;
+  border: 1px solid #ddd;
+}
+
+.ingredient tr:nth-child(odd){
+  background-color: #f2f2f2;
+}
+
+.ingredient tr:hover {
+  background-color: #ddd;
+}
+
+
+
 .timeContainer {
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+}
+
+.timeContainer .time {
+  margin-bottom: 20px;
+}
+
+.time span {
+  font-size: 20px;
+  font-weight: 700;
 }
 
 .time div {
-  font-weight: 700;
+  font-weight: 100;
+}
+
+@media print {
+  .noprint {
+    display: none !important;
+  }
 }

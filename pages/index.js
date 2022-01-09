@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Image from 'next/image'
+import Header from '../components/Header/Header';
 // import React from 'react'
 import styles from '../styles/Home.module.css'
 import Link from "next/link";
@@ -32,6 +33,7 @@ export default function Home({ recipes }) {
 				<title>Next Recipes - Home</title>
 				<meta name="viewport" content="initial-scale=1.0, width=device-width" />
 			</Head>
+			<Header />
 			<div className={styles.container}>
 				<main>
 					<h1>Recipes</h1>
